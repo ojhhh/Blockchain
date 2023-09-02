@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>first block</h1>
+    <h1>first GenesisBlock is make a hard coding</h1>
+    <div>
+      <div id="block">
+        <label for="">block version</label>
+        <h3 id="version"></h3>
+        <label for="">block heigth(first GenesisBlock number 0)</label>
+        <h3 id="height"></h3>
+        <label for="">block timestamp (GenesisBlock timestamp)</label>
+        <h3 id="timestamp"></h3>
+        <label for=""
+          >before block hash (Replace with previous block hash 0)</label
+        >
+        <h3 id="previousHash"></h3>
+        <label for="">block hash (Replace block hash 0)</label>
+        <h3 id="hash"></h3>
+        <label for="">merkleRoot</label>
+        <h3 id="merkleRoot"></h3>
+        <label for="">nonce ()</label>
+        <h3 id="nonce"></h3>
+        <label for="">difficulty</label>
+        <h3 id="difficulty"></h3>
+        <label for="">block data</label>
+        <h3 id="data"></h3>
+      </div>
+    </div>
+    <script>
+      const blockData = {
+        version: "1.0.0",
+        height: 0,
+        timestamp: Date.now(),
+        previousHash: "0".repeat(64),
+        hash: "0".repeat(64),
+        merkleRoot: "0".repeat(64),
+        nonce: 0,
+        difficulty: 0,
+        data: [
+          "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
+        ],
+      };
+
+      for (const key in blockData) {
+        block.children[key].innerHTML = blockData[key];
+      }
+    </script>
+  </body>
+</html>
