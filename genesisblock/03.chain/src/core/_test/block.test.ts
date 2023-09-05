@@ -3,6 +3,7 @@
 // 단위 테스트기 때문에 절차적으로 테스트 진행
 
 import Block from "@core/block/block";
+import Chain from "@core/chain/chain";
 import { GENESIS } from "@core/config";
 
 // describe : 테스트 그룹 지정
@@ -16,7 +17,8 @@ import { GENESIS } from "@core/config";
 
 describe("block verify", () => {
   let newBlock: Block;
-
+  let newChain: Chain;
+  let newChain2: Chain;
   // 테스트할 코드의 최소 단위
   it("add block", () => {
     const data = ["Block 1"];
@@ -34,5 +36,31 @@ describe("block verify", () => {
     // 결과가 성공한게 맞는지 확인
     if (isValidNewBlock.isError) return expect(true).toBe(false);
     expect(isValidNewBlock.isError).toBe(false);
+  });
+
+  // 블록 체인 추가
+  it("Add Block chain", () => {
+    newChain = new Chain();
+    newChain.addToChain(newBlock);
+
+    console.log(newChain.get());
+
+    console.log(newChain.getBlockByHash(newBlock.hash));
+  });
+
+  //
+  it("Longest Chain Rule", () => {
+    newChain2 = new Chain();
+    newChain2.replaceChain(newChain.get());
+    console.log(newChain2);
+  });
+
+  // 블록 생성 주기를 계산해서 정해 놓은 생명 주기보다 빠른지 느린지 판단
+  it("before 10 block or genesis block", () => {
+    for (let i = 0; i < 20; i++) {
+      let block = new Block(newChain.lastestBlock(), ["block"]);
+      newChain.addToChain(block);
+    }
+    console.log(newChain.getAdjustmentBlock());
   });
 });
