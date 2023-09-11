@@ -19,6 +19,9 @@ class Block extends BlockHeader implements IBlock {
   nonce: number;
   difficulty: number;
   data: string[];
+  // _previousBlock 마지막 이전 블록
+  // 현재 데이터
+  // _adjustmentBlock 높이가 10번 이하면 GENESIS 블록 10 이하면 10의 배수에 있는 블록의 정보를 가져옴
   constructor(_previousBlock: Block, _data: string[], _adjustmentBlock: Block) {
     // 부모 클래스 생성자 호출
     super(_previousBlock);
