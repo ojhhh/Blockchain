@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>wallet tutorial</h1>
+    <button id="walletBtn">create wallet</button>
+    <ul id="walletList">
+      <li>bitcoin wallet</li>
+      <li>account : <span id="account"></span></li>
+      <li>privateKey : <span id="privateKey"></span></li>
+      <li>publicKey : <span id="publicKey"></span></li>
+      <li>balance : <span id="balance"></span></li>
+    </ul>
+
+    <h1>wallet list</h1>
+    <button id="walletListBtn">search wallet list</button>
+    <div>
+      <ul id="walletListData">
+        push the search wallet list
+      </ul>
+    </div>
+  </body>
+  <script>
+    const render = (wallet) => {
+      account.innerHTML = wallet.account;
+      privateKey.innerHTML = wallet.privateKey;
+      publicKey.innerHTML = wallet.publicKey;
+      balance.innerHTML = wallet.balance;
+    };
+
+    walletBtn.onclick = async () => {
+      const { data: resp } = await axios.post("/newWallet", null);
+      console.log("walletBtn.resp : ", resp);
+      render(resp);
+    };
+
+    const getView = async (account) => {
+      console.log(account);
+      const { data: resp } = await axios.post("/walletSelect", { account });
+      console.log("getView.resp : ", resp);
+      render(resp);
+    };
+
+    walletListBtn.onclick = async () => {
+      const { data: resp } = await axios.post("/walletList", null);
+      const list = resp.map((account) => {
+        return `<li onclick="getView('${account}')">${account}</li>`;
+      });
+
+      walletListData.innerHTML = list;
+    };
+  </script>
+</html>
