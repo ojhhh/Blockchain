@@ -64,6 +64,7 @@ export class Wallet {
     return keyPair.getPublic().encode("hex", false);
   }
 
+  // 비트코인 지갑에서는 대부분 26 ~ 35 길이의 문자를 지갑 주소로 가짐
   public getAccount(): string {
     return `${this.publicKey.slice(26).toString()}`;
   }
