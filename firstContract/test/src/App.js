@@ -25,7 +25,7 @@ function App() {
       console.log("data : ", data);
 
       // 네트워크 web3 연결
-      console.log(new Web3(window.ethereum));
+      // console.log(new Web3(window.ethereum));
       setWeb3(new Web3(window.ethereum));
       setAccount(data);
     })();
