@@ -98,8 +98,8 @@ export const BodyBottom = styled.div`
   .SwapBtn img,
   .BridgeBtn img,
   .PortfolioBtn img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   & .SendBtn img {

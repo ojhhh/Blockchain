@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   MainBodyWrap,
   BodyTop,
@@ -11,15 +11,47 @@ import Arrow from "../../../images/arrow-right-solid.svg";
 import DArrow from "../../../images/arrow-right-arrow-left-solid.svg";
 import Bridge from "../../../images/bezier-curve-solid.svg";
 import portFolio from "../../../images/chart-line-solid.svg";
+import Web3 from "web3";
 
 const MainBody = () => {
+  const [account, setAccount] = useState("0xABD...ERFG");
+  const [balance, setBalance] = useState(0);
+  const [web3, setWeb3] = useState(null);
+  const [sliceAccount, setSliceAccount] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const [data] = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("data : ", data);
+      setWeb3(new Web3(window.ethereum));
+      // 로그인한 계정 정보 가져오기
+      setAccount(data);
+      // 계정 잔액 가져오기
+      // setBalance(web3.eth.getBalance(data));
+    })();
+  }, []);
+
+  useEffect(() => {
+    setSliceAccount(account.slice(0, 5) + "..." + account.slice(-4));
+    if (web3) {
+      (async () => {
+        const ta = await web3.eth.getBalance(account);
+        console.log("ta : ", ta);
+      })();
+    }
+  }, [web3]);
+
+  useEffect(() => {}, [balance]);
+
   return (
     <MainBodyWrap>
       {/* 계정 복사 부분 */}
       <BodyTop>
         <div className="AccountBox">
           <div className="AccountInfo">
-            <span>0xABD...ERFG</span>
+            <span>{sliceAccount}</span>
           </div>
           <div className="AccountCopy">
             <img src={Copy} />
@@ -29,7 +61,7 @@ const MainBody = () => {
       {/* 잔액 출력 */}
       <BodyMiddle>
         <div className="BalanceBox">
-          <span>100 ETH</span>
+          <span>{balance} ETH</span>
         </div>
       </BodyMiddle>
       {/* 기능 버튼  */}
