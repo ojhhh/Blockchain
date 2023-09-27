@@ -1,30 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   MainBodyWrap,
   BodyTop,
   BodyMiddle,
   BodyBottom,
 } from "./MainBody.styled";
-import Copy from "../../../images/clone-solid.svg";
-import Add from "../../../images/plus-solid.svg";
-import Arrow from "../../../images/arrow-right-solid.svg";
-import DArrow from "../../../images/arrow-right-arrow-left-solid.svg";
-import Bridge from "../../../images/bezier-curve-solid.svg";
-import portFolio from "../../../images/chart-line-solid.svg";
+
+import { Copy, Add, Arrow, DArrow, Bridge, portFolio } from "../../../images";
+
 import Web3 from "web3";
 
-const MainBody = () => {
+import SendList from "../SendBody/SendList";
+
+const MainBody = ({ onChangePage }) => {
   const [account, setAccount] = useState("0xABD...ERFG");
   const [balance, setBalance] = useState(0);
   const [web3, setWeb3] = useState(null);
   const [sliceAccount, setSliceAccount] = useState(null);
+  const [gasfee, setGasfee] = useState(0);
+  const [sendpopup, setSendpopup] = useState(false);
 
   useEffect(() => {
     (async () => {
       const [data] = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      console.log("data : ", data);
+
+      // 메타마스크에 등록된 지갑 주소를 가져옴
+      const ethAccount = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+
+      // 네트워크 ID 확인
+      const netId = await window.ethereum.request({
+        method: "net_version",
+      });
+
+      // ethereum 체인 ID 확인
+      const chainId = await window.ethereum.request({
+        method: "eth_chainId",
+      });
+
+      console.log("ethAccount : ", ethAccount);
       setWeb3(new Web3(window.ethereum));
       // 로그인한 계정 정보 가져오기
       setAccount(data);
@@ -37,13 +54,34 @@ const MainBody = () => {
     setSliceAccount(account.slice(0, 5) + "..." + account.slice(-4));
     if (web3) {
       (async () => {
-        const ta = await web3.eth.getBalance(account);
-        console.log("ta : ", ta);
+        // 잔액 ETH 단위로 변경
+        const changeETH = await web3.eth.getBalance(account);
+        const _changeETH = await web3.utils.fromWei(changeETH, "ether");
+
+        setBalance(_changeETH);
+
+        // 가스비 ETH 단위로 변경
+        const changeGasfee = await web3.eth.getGasPrice();
+        // console.log("changeGasfee : ", changeGasfee);
+        const _changeGasfee = await web3.utils.fromWei(changeGasfee, "ether");
+        setGasfee(_changeGasfee);
       })();
     }
   }, [web3]);
 
   useEffect(() => {}, [balance]);
+
+  // console.log("gasfee : ", gasfee);
+
+  // 지갑 주소 복사
+  const copyAccount = () => {
+    navigator.clipboard.writeText(account);
+  };
+
+  // 보내기 버튼 누르면 계정 리스트 출력
+  const sendBtnHandle = () => {
+    console.log("hi");
+  };
 
   return (
     <MainBodyWrap>
@@ -53,7 +91,7 @@ const MainBody = () => {
           <div className="AccountInfo">
             <span>{sliceAccount}</span>
           </div>
-          <div className="AccountCopy">
+          <div className="AccountCopy" onClick={copyAccount}>
             <img src={Copy} />
           </div>
         </div>
@@ -74,7 +112,7 @@ const MainBody = () => {
             <span>구매</span>
           </div>
         </div>
-        <div className="SendBox">
+        <div className="SendBox" onClick={() => onChangePage("SendList")}>
           <div className="SendBtn">
             <img src={Arrow} alt="" />
           </div>

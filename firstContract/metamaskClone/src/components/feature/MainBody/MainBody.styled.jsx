@@ -34,6 +34,9 @@ export const BodyTop = styled.div`
   & .AccountCopy {
     width: 20%;
   }
+  & .AccountCopy:hover {
+    cursor: pointer;
+  }
   & .AccountCopy img {
     width: 12px;
     height: 12px;
@@ -93,6 +96,11 @@ export const BodyBottom = styled.div`
     justify-content: center;
   }
 
+  & .BuyBtn,
+  .BridgeBtn {
+    background-color: rgb(53, 94, 148);
+  }
+
   & .BuyBtn img,
   .SendBtn img,
   .SwapBtn img,
@@ -107,11 +115,15 @@ export const BodyBottom = styled.div`
   }
 
   & .BuyText,
-  .BuyText,
   .SendText,
   .SwapText,
   .BridgeText,
   .PortfolioText {
     margin-top: 5px;
+  }
+
+  & .BuyText span,
+  .BridgeText span {
+    color: rgb(145, 146, 147);
   }
 `;
