@@ -8,7 +8,6 @@ const App = () => {
   const [network, setNetwork] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [token, setToken] = useState("0");
-  const [ether, setEther] = useState("0");
 
   const [value, setValue] = useState("");
   const [value2, setValue2] = useState("");
@@ -18,7 +17,7 @@ const App = () => {
       if (ERC20Contract) return;
       const ERC20 = new web3.eth.Contract(
         abi,
-        "0x6F9DE8FF312340991831b65916e2d93fA95728ad",
+        "0xf2552CCf8c66B86fD1ce44B2c8B5Cd6B62925Dd9",
         { data: "" }
       );
       setERC20Contract(ERC20);
@@ -103,6 +102,7 @@ const App = () => {
   const switchNet = async () => {
     // 메타마스크에 해당 네트워크가 맞는지 요청
     // wallet_switchEthereumChain == chainid가 맞는지 검사
+    // sepolia chainId : 0xaa36a7
     const net = await window.ethereum.request({
       jsonrpc: "2.0",
       method: "wallet_switchEthereumChain",
