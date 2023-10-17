@@ -10,7 +10,6 @@ const json_url = process.env.REACT_APP_JSON_URL;
 
 const App = () => {
   const { user, web3 } = useWeb3();
-  const [accounts, setAccounts] = useState([]);
   const [contract, setContract] = useState(null);
 
   const [file, setFile] = useState(null);
@@ -31,7 +30,7 @@ const App = () => {
 
       const myNFT = new web3.eth.Contract(
         abi,
-        "0x3Babc234FAcFf026302f562846c1d3b5EeFEE418",
+        "0x7eF97EE5d3FC0183c34Ae875e4dA7BeBd0dA0fE8",
         { data: "" }
       );
       setContract(myNFT);
@@ -85,7 +84,7 @@ const App = () => {
       console.log("result : ", result);
 
       if (result) {
-        getCount();
+        await getTokenIdLength();
         const { data } = result;
         setJsonhash(data.IpfsHash);
       }
@@ -100,8 +99,8 @@ const App = () => {
 
   useEffect(() => {}, [jsonhash]);
 
-  const getCount = async () => {
-    const result = await contract.methods.getCount().call();
+  const getTokenIdLength = async () => {
+    const result = await contract.methods.getTokenIdLength().call();
 
     setTokenId(parseInt(result));
   };
@@ -109,8 +108,14 @@ const App = () => {
   const minting = async () => {
     // await contract.methods.minting(count).send({ from: user.account });
     await contract.methods
-      .tokenId(tokenId, jsonhash)
+      .minting(tokenId, jsonhash)
       .send({ from: user.account });
+  };
+
+  const getMyNFT = async () => {
+    const myNFT = await contract.methods.getMyNFT().call();
+
+    console.log("myNFT : ", myNFT);
   };
 
   return (
@@ -123,7 +128,7 @@ const App = () => {
         onChange={(e) => {
           setFile(e.target.files[0]);
         }}
-      />{" "}
+      />
       <br />
       <button onClick={upload}>FILE upload</button>
       <h2>배포용 json 만들기</h2>
@@ -138,22 +143,18 @@ const App = () => {
         <input type="text" onChange={(e) => setDescription(e.target.value)} />
         <br />
         <span>NFT URL : </span>
-        <input
-          type="text"
-          readOnly
-          placeholder={filehash}
-          style={{ width: "auto" }}
-        />
+        <input type="text" readOnly placeholder={filehash} />
         <br />
         <button onClick={jsonUpload}>JSON upload</button>
       </div>
       <h2>MINTING</h2>
       <span>TOKEN ID : </span>
-      <input type="text" readOnly placeholder={count} />
+      <input type="text" readOnly placeholder={tokenId} />
       <br />
       <span>JSON HASH : </span>
       <input type="text" readOnly placeholder={jsonhash} /> <br />
       <button onClick={minting}>MINTING</button>
+      <h2>MY NFT</h2>
     </>
   );
 };
