@@ -17,7 +17,7 @@ const App = () => {
       if (ERC20Contract) return;
       const ERC20 = new web3.eth.Contract(
         abi,
-        "0xf2552CCf8c66B86fD1ce44B2c8B5Cd6B62925Dd9",
+        "0x7c3b2cC6B5b44d297a6fe6a2d4212CB725932082",
         { data: "" }
       );
       setERC20Contract(ERC20);

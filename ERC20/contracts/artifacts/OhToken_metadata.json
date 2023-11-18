@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.23+commit.f704f362"
 	},
 	"language": "Solidity",
 	"output": {
@@ -422,7 +422,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/OhToken.sol": "OhToken"
+			"ERC20/contracts/OhToken.sol": "OhToken"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -436,7 +436,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/OhToken.sol": {
+		"ERC20/contracts/OhToken.sol": {
 			"keccak256": "0x1146b5b3ec917f724a1b2148b2f0ae6d733d633bc26733297cd35980a4b07dae",
 			"license": "MIT",
 			"urls": [
@@ -444,7 +444,7 @@
 				"dweb:/ipfs/QmPN1K11gx7T68i6wPDNw15dBVfXjYdz7WTtAvFMSjL9nS"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+		"ERC20/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
 			"keccak256": "0x60c65f701957fdd6faea1acb0bb45825791d473693ed9ecb34726fdfaa849dd7",
 			"license": "MIT",
 			"urls": [
@@ -452,7 +452,7 @@
 				"dweb:/ipfs/QmcLLJppxKeJWqHxE2CUkcfhuRTgHSn8J4kijcLa5MYhSt"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+		"ERC20/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
 			"keccak256": "0xc3e1fa9d1987f8d349dfb4d6fe93bf2ca014b52ba335cfac30bfe71e357e6f80",
 			"license": "MIT",
 			"urls": [
@@ -460,7 +460,7 @@
 				"dweb:/ipfs/QmTdwkbQq7owpCiyuzE7eh5LrD2ddrBCZ5WHVsWPi1RrTS"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+		"ERC20/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70",
 			"license": "MIT",
 			"urls": [
@@ -468,7 +468,7 @@
 				"dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+		"ERC20/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
 			"keccak256": "0xaa761817f6cd7892fcf158b3c776b34551cde36f48ff9703d53898bc45a94ea2",
 			"license": "MIT",
 			"urls": [
@@ -476,7 +476,7 @@
 				"dweb:/ipfs/QmcrhfPgVNf5mkdhQvy1pMv51TFokD3Y4Wa5WZhFqVh8UV"
 			]
 		},
-		"node_modules/@openzeppelin/contracts/utils/Context.sol": {
+		"ERC20/node_modules/@openzeppelin/contracts/utils/Context.sol": {
 			"keccak256": "0x75a4ee64c68dbd5f38bddd06e664a64c8271b4caa554fb6f0607dfd672bb4bf3",
 			"license": "MIT",
 			"urls": [
