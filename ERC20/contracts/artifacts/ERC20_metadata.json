@@ -325,7 +325,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ERC20/contracts/ERC20.sol": "ERC20"
+			"contracts/ERC20.sol": "ERC20"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -339,7 +339,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"ERC20/contracts/ERC20.sol": {
+		"contracts/ERC20.sol": {
 			"keccak256": "0x68468447098e95e476a3c1dc5776cfbbd30b83b2721e701aa0f37ef7e2b8da8f",
 			"license": "MIT",
 			"urls": [
@@ -347,7 +347,7 @@
 				"dweb:/ipfs/QmX7srECGqjc2MYK7tzx3Vi3WxZmLBciUMJEhF8qzyUGru"
 			]
 		},
-		"ERC20/contracts/IERC20.sol": {
+		"contracts/IERC20.sol": {
 			"keccak256": "0x35776ec45295d18543dc3943ce178b2a8569b1dcf1caec009a0e542edcd45a7a",
 			"license": "MIT",
 			"urls": [

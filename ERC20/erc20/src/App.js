@@ -17,10 +17,22 @@ const App = () => {
       if (ERC20Contract) return;
       const ERC20 = new web3.eth.Contract(
         abi,
-        "0x7c3b2cC6B5b44d297a6fe6a2d4212CB725932082",
+        "0xcc23C0F719668c3B3f011378d135B1fDFA9378Dd",
         { data: "" }
       );
       setERC20Contract(ERC20);
+
+      setInterval(() => {
+        web3.eth.getBlockNumber().then((latestBlockNumber) => {
+          console.log("Latest Block Number:", latestBlockNumber);
+
+          web3.eth.getBlock(latestBlockNumber).then((block) => {
+            console.log("Block Details:", block);
+            console.log(block.hash);
+            web3.eth.getTransactionReceipt(block.hash).then(console.log);
+          });
+        });
+      }, 5000);
     }
   }, [web3]);
 
